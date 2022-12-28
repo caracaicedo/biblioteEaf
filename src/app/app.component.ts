@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { BibliotecaService } from './service/biblioteca.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'biblioteEaf';
+
+  constructor(
+    private bibliotecaService :BibliotecaService
+  ){
+
+  }
 }
