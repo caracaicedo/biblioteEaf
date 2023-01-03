@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CrearLibroComponent } from './pages/crear-libro/crear-libro.component';
-import { LibroComponent } from './pages/libro/libro.component';
+import { BibliotecaComponent } from './pages/biblioteca/biblioteca.component';
 import { PagesComponent } from './pages/pages.component';
 
 const routes: Routes = [{
   path: 'libro',
-  component: LibroComponent,
+  component: BibliotecaComponent,
   },
   {
     path: '',
@@ -14,7 +13,7 @@ const routes: Routes = [{
 
     children:[{
       path:'libro/crear' ,
-      component: CrearLibroComponent
+      component: BibliotecaComponent
     },
       {path: '',    pathMatch: 'full', redirectTo: 'libro' },
       {path: '**',  pathMatch: 'full', redirectTo: 'libro'}

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BibliotecaService } from './service/biblioteca.service';
+import { BibliotecaService } from './services/biblioteca.service';
 
 @Component({
   selector: 'app-root',

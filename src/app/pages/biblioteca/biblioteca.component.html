@@ -1,0 +1,148 @@
+<div class="row">
+  <div class="col-12">
+      <h4 class="letra-color-negro"><strong class="letra-color-negro">Biblioteca EAF</strong></h4>
+      <br>
+
+
+      <!-- CREAR CLIENTE -->
+      <!-- <div class="row justify-content-end ">
+          <div class="col-lg-2  col-md-2 col-sm-2">
+              <button class="btn btn-danger btn-block color-rojo-Claro btn-sm"
+                  routerLink="/biometriaVoz/administrador/parametrizacion/usuarios/nuevo">
+                  Nuevo Usuario
+              </button>
+          </div>
+      </div>
+      <br> -->
+
+      <!-- FORMULARIO DE BUSQUEDA -->
+      <form class="form-inline" [formGroup]="formularioBusqueda">
+
+          <!-- <div class="form-group col-lg-2 col-md-2 col-sm-3" style="padding: 3px;">
+              <label for="exampleInputEmail1">Identificación Cliente:</label>
+              <input type="text" formControlName="identificacionCliente" class="form-control w-100"
+                  placeholder="Identificación Cliente"/>
+          </div> -->
+          <div class="form-group col-lg-2 col-md-2 col-sm-3" style="padding: 3px;">
+              <label for="exampleInputEmail1">Categoria</label>
+              <select class="form-control w-100" formControlName="nit">
+                  <option selected>Todos</option>
+                  <option [value]="categoria.id_categoria" *ngFor="let categoria of listaCategoria">{{categoria.nombre_categoria}}</option>
+              </select>
+          </div>
+          <div class="form-group col-lg-2 col-md-2 col-sm-3" style="padding: 3px;">
+            <label for="exampleInputEmail1">Autor:</label>
+            <select class="form-control w-100" formControlName="tipoUsuario">
+                <option selected>Todos</option>
+                <option [value]="autor.id_autor" *ngFor="let autor of listaAutor">{{autor.nombre_autor}}</option>
+            </select>
+        </div>
+          <div class="form-group col-lg-2 col-md-2 col-sm-3" style="padding: 3px;">
+              <label for="exampleInputLibro">Libro:</label>
+              <select class="form-control w-100" formControlName="libro">
+                  <option selected>Todos</option>
+                  <option [value]="rol.id_autor" *ngFor="let rol of listaAutor">{{rol.nombre_autor}}</option>
+              </select>
+          </div>
+          <div class="col-lg-1  col-md-1 col-sm-1">
+              <strong></strong>
+              <button class="btn btn-danger btn-block color-rojo-Claro btn-sm"
+                  (click)="buscar(formularioBusqueda.value)">
+                  <i class="fa fa-search"></i>
+                  Buscar
+              </button>
+          </div>
+
+          <div class="col-lg-1  col-md-1 col-sm-1">
+              <strong></strong>
+              <button class="btn btn-danger btn-block color-rojo-Claro btn-sm" (click)="limpiar()">
+                  <i class="fa fa-refresh"></i>
+                  Limpiar
+              </button>
+          </div>
+
+      </form>
+
+      <!-- no hay registros -->
+      <div class="alert alert-danger text-center mt-3"
+          *ngIf="cargaCompleta && listaCategoria && listaCategoria.length == 0">
+          <p class="">No hay registros</p>
+      </div>
+
+      <!-- tabla -->
+      <section *ngIf="listaCategoria ">
+          <br>
+          <div class="table-responsive">
+              <table class="table table-striped tabla-gris">
+                  <thead>
+                      <tr class="color-rojo-Claro">
+                          <th scope="col" class="text-center borde-derecho p-1 texto-blanco-header">Identificación
+                              Cliente</th>
+                          <th scope="col" class="text-center borde-derecho p-1 texto-blanco-header">Nombre Cliente
+                          </th>
+                          <th scope="col" class="text-center borde-derecho p-1 texto-blanco-header">Número Documento
+                          </th>
+                          <th scope="col" class="text-center borde-derecho p-1 texto-blanco-header">Nombres</th>
+                          <th scope="col" class="text-center borde-derecho p-1 texto-blanco-header">Apellidos</th>
+                          <th scope="col" class="text-center borde-derecho p-1 texto-blanco-header">Usuarios</th>
+                          <th scope="col" class="text-center borde-derecho p-1 texto-blanco-header">Contraseña</th>
+
+                          <th scope="col" class="text-center borde-derecho p-1 texto-blanco-header">Tipo de Usuario
+                          </th>
+                          <th scope="col" class="text-center borde-derecho p-1 texto-blanco-header">Editar</th>
+                      </tr>
+                  </thead>
+              </table>
+          </div>
+      </section>
+      <!-- fin tabla -->
+
+      <!-- <div class="row justify-content-end ">
+          <div class="col-lg-2  col-md-2 col-sm-2">
+              <button class="btn btn-danger btn-block color-rojo-Claro btn-sm" (click)="exportarFile('csv')">
+                  Exportar CSV
+              </button>
+          </div>
+
+          <div class="col-lg-2  col-md-2 col-sm-2">
+              <button class="btn btn-danger btn-block color-rojo-Claro btn-sm" (click)="exportarFile('xlsx')">
+                  Exportar excel
+              </button>
+          </div>
+      </div>
+      <br> -->
+
+      <!-- FORMULARIO SELECCION CANTIDA DE REGISTROS A MOSTRAR -->
+      <div *ngIf="listaCategoria && listaCategoria.length > 0">
+          <form [formGroup]="formaConsultaRegistros" (ngSubmit)="cambiarCantRegistros()">
+              <label>Cantidad de Registros por Página</label>
+              <div class="display-flex">
+                  <div class="input-group col-3 p-1">
+                      <input type="text" min="1" class="form-control" formControlName="inputRegistros"
+                          placeholder="Cant. Registros" [class.is-invalid]="RegistrosNoValido">
+                      <div class="input-group-append">
+                          <button type="submit" class="btn btn-danger btn-block color-rojo-Claro btn-sm"
+                              [disabled]="formaConsultaRegistros.invalid">
+                              >
+                          </button>
+                      </div>
+                  </div>
+                  <!-- Paginacion -->
+                  <!-- <div class="clearfix" *ngIf="listaReporte.length > 0 " style="margin-left: auto; margin-right: 0;">
+                      <pagination-controls class="d-flex justify-content-end" responsive="true"
+                          previousLabel="Anterior" nextLabel="Siguiente" (pageChange)="page=$event">
+                      </pagination-controls>
+                  </div> -->
+                  <!-- fin Paginacion -->
+              </div>
+              <div *ngIf="RegistrosNoValido">
+                  <div *ngFor="let validation of count_validation_messages.inputRegistros">
+                      <small class="text-danger"
+                          *ngIf="validarError(formaConsultaRegistros,'inputRegistros', validation.type)">{{validation.message}}</small>
+                  </div>
+              </div>
+          </form>
+      </div>
+      <br>
+  </div>
+</div>
