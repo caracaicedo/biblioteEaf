@@ -1,4 +1,5 @@
-export const environment = {
+export let environment = {
   production: true,
-  url_biblioteca:'http://localhost:8082/'
+  env: 'production',
+  url_biblioteca: 'http://localhost:8082/'
 };
