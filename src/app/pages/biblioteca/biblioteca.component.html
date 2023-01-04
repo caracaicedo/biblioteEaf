@@ -30,6 +30,9 @@
                   <option [value]="categoria.id_categoria" *ngFor="let categoria of listaCategoria">{{categoria.nombre_categoria}}</option>
               </select>
           </div>
+          <div>
+
+          </div>
           <div class="form-group col-lg-2 col-md-2 col-sm-3" style="padding: 3px;">
             <label for="exampleInputEmail1">Autor:</label>
             <select class="form-control w-100" formControlName="tipoUsuario">
@@ -68,7 +71,6 @@
           *ngIf="cargaCompleta && listaCategoria && listaCategoria.length == 0">
           <p class="">No hay registros</p>
       </div>
-
       <!-- tabla -->
       <section *ngIf="listaCategoria ">
           <br>
