@@ -2,27 +2,8 @@
   <div class="col-12">
       <h4 class="letra-color-negro"><strong class="letra-color-negro">Biblioteca EAF</strong></h4>
       <br>
-
-
-      <!-- CREAR CLIENTE -->
-      <!-- <div class="row justify-content-end ">
-          <div class="col-lg-2  col-md-2 col-sm-2">
-              <button class="btn btn-danger btn-block color-rojo-Claro btn-sm"
-                  routerLink="/biometriaVoz/administrador/parametrizacion/usuarios/nuevo">
-                  Nuevo Usuario
-              </button>
-          </div>
-      </div>
-      <br> -->
-
       <!-- FORMULARIO DE BUSQUEDA -->
       <form class="form-inline" [formGroup]="formularioBusqueda">
-
-          <!-- <div class="form-group col-lg-2 col-md-2 col-sm-3" style="padding: 3px;">
-              <label for="exampleInputEmail1">Identificación Cliente:</label>
-              <input type="text" formControlName="identificacionCliente" class="form-control w-100"
-                  placeholder="Identificación Cliente"/>
-          </div> -->
           <div class="form-group col-lg-2 col-md-2 col-sm-3" style="padding: 3px;">
               <label for="exampleInputEmail1">Categoria</label>
               <select class="form-control w-100" formControlName="nit">
@@ -40,13 +21,13 @@
                 <option [value]="autor.id_autor" *ngFor="let autor of listaAutor">{{autor.nombre_autor}}</option>
             </select>
         </div>
-          <div class="form-group col-lg-2 col-md-2 col-sm-3" style="padding: 3px;">
+          <!-- <div class="form-group col-lg-2 col-md-2 col-sm-3" style="padding: 3px;">
               <label for="exampleInputLibro">Libro:</label>
               <select class="form-control w-100" formControlName="libro">
                   <option selected>Todos</option>
                   <option [value]="rol.id_autor" *ngFor="let rol of listaAutor">{{rol.nombre_autor}}</option>
               </select>
-          </div>
+          </div> -->
           <div class="col-lg-1  col-md-1 col-sm-1">
               <strong></strong>
               <button class="btn btn-danger btn-block color-rojo-Claro btn-sm"
@@ -55,6 +36,7 @@
                   Buscar
               </button>
           </div>
+          <br>
 
           <div class="col-lg-1  col-md-1 col-sm-1">
               <strong></strong>
@@ -78,22 +60,35 @@
               <table class="table table-striped tabla-gris">
                   <thead>
                       <tr class="color-rojo-Claro">
-                          <th scope="col" class="text-center borde-derecho p-1 texto-blanco-header">Identificación
-                              Cliente</th>
-                          <th scope="col" class="text-center borde-derecho p-1 texto-blanco-header">Nombre Cliente
-                          </th>
-                          <th scope="col" class="text-center borde-derecho p-1 texto-blanco-header">Número Documento
-                          </th>
-                          <th scope="col" class="text-center borde-derecho p-1 texto-blanco-header">Nombres</th>
-                          <th scope="col" class="text-center borde-derecho p-1 texto-blanco-header">Apellidos</th>
-                          <th scope="col" class="text-center borde-derecho p-1 texto-blanco-header">Usuarios</th>
-                          <th scope="col" class="text-center borde-derecho p-1 texto-blanco-header">Contraseña</th>
-
-                          <th scope="col" class="text-center borde-derecho p-1 texto-blanco-header">Tipo de Usuario
-                          </th>
-                          <th scope="col" class="text-center borde-derecho p-1 texto-blanco-header">Editar</th>
-                      </tr>
+                          <th scope="col" class="text-center borde-derecho p-1 texto-blanco-header">Tipo</th>
+                          <th scope="col" class="text-center borde-derecho p-1 texto-blanco-header">Fecha Inactivación</th>
+                          <th scope="col" class="text-center borde-derecho p-1 texto-blanco-header">Cantidad de Ejemplares</th>
+                          <th scope="col" class="text-center borde-derecho p-1 texto-blanco-header">Id Producto</th>
+                          <th scope="col" class="text-center borde-derecho p-1 texto-blanco-header">Maximo Periodo de prestamo</th>
+                          <th scope="col" class="text-center borde-derecho p-1 texto-blanco-header">Nombre Categoria</th>
+                          <th scope="col" class="text-center borde-derecho p-1 texto-blanco-header">Titulo</th>
+                          <th scope="col" class="text-center borde-derecho p-1 texto-blanco-header">Fecha Llegada a Biblioteca</th>
+                          <th scope="col" class="text-center borde-derecho p-1 texto-blanco-header">Cantidad Disponible</th>
+                          <th scope="col" class="text-center borde-derecho p-1 texto-blanco-header">Autor</th>                      </tr>
                   </thead>
+                  <tbody>
+                    <tr *ngFor="let item of listaProducto">
+                        <td class="control-ellipsis text-center">{{item.tipo}}</td>
+                        <td class="control-ellipsis text-center">{{item.FECHA_inactivacion}}</td>
+                        <td class="control-ellipsis text-center">{{item.CANTIDAD_ejemplares}}</td>
+                        <td class="control-ellipsis text-center">{{item.id_producto}}</td>
+                        <td class="control-ellipsis text-center">{{item.max_PERIODO_prestamo}}</td>
+                        <td class="control-ellipsis text-center">{{item.nombre_categoria}}</td>
+
+                        <td class="control-ellipsis text-center">{{item.titulo}}</td>
+                        <td class="control-ellipsis text-center">{{item.FECHA_LLEGADA_BIBLIOTECA}}</td>
+                        <td class="control-ellipsis text-center">{{item.cantidad_ejemplares_disponibles}}</td>
+                        <td class="control-ellipsis text-center">{{item.autores}}</td>
+                        <td class="text-center">
+                            <!-- <button class="fa fa-pencil-square-o btn btn-info btn-circle" (click)="editarCliente(item)"></button> -->
+                        </td>
+                    </tr>
+                </tbody>
               </table>
           </div>
       </section>

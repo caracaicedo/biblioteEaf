@@ -10,6 +10,8 @@ import { Router} from '@angular/router';
 import { categoria } from 'src/app/models/biblioteca/categoria.model';
 import { BibliotecaService } from 'src/app/services/biblioteca.service';
 import { autor } from 'src/app/models/biblioteca/autor.model';
+import { productoResponse } from 'src/app/models/biblioteca/productoResponse.model';
+import { propiedadesResponse } from 'src/app/models/biblioteca/propiedades.model';
 
 @Component({
   selector: 'app-biblioteca',
@@ -20,6 +22,10 @@ export class BibliotecaComponent implements OnInit {
 
   listaCategoria: categoria[] = [];
   listaAutor: autor[] = [];
+
+  listaProducto: productoResponse[] = [];
+
+  listaPropiedades: propiedadesResponse[] = [];
 
   cargaCompleta   : boolean = false;
 
@@ -39,8 +45,10 @@ export class BibliotecaComponent implements OnInit {
   ngOnInit() {
     this.construirForm();
     // this.ConsultarRoles();
+    this.cargarPropiedades();
     this.ConsultarAutor();
     this.ConsultarCategoria();
+    this.ConsultarProducto();
   }
 
   construirForm() {
@@ -140,6 +148,62 @@ export class BibliotecaComponent implements OnInit {
         Swal.close();
         // GeneralService.mostrarMensaje("Error consultando el servicio", "de categoria", "error");
       });
+
+  }
+
+  cargarPropiedades() {
+    Swal.fire({
+     text: 'Cargando Información',
+     allowOutsideClick: false
+   });
+   Swal.showLoading(Swal.getDenyButton())
+   this.bibliotecaService.getPropieades().subscribe(
+     (resp: propiedadesResponse[]) => {
+       Swal.close();
+       this.listaPropiedades=resp;
+  localStorage.setItem("url_api_bliblioteca",this.listaPropiedades[0].valor);
+
+
+
+    },
+     error => {
+       console.log('EEEEEEEEEEEEEEEE ')
+
+       Swal.close();
+       // GeneralService.mostrarMensaje("Error consultando el servicio", "de categoria", "error");
+     });
+   }
+
+
+  ConsultarProducto() {
+    // Swal.fire({
+    //   text: 'Cargando Información',
+    //   allowOutsideClick: false
+    // });
+    // Swal.showLoading(Swal.getDenyButton())
+    // this.bibliotecaService.getAutor().subscribe(
+    //   (resp: any) => {
+    //     Swal.close();
+
+
+    //     this.listaProducto = resp;
+
+
+    //  },
+    //   error => {
+    //     Swal.close();
+    //     // GeneralService.mostrarMensaje("Error consultando el servicio", "de categoria", "error");
+    //   });
+    this.listaProducto[0].CANTIDAD_ejemplares=1;
+    this.listaProducto[0].FECHA_LLEGADA_BIBLIOTECA='01/07/2022';
+    this.listaProducto[0].FECHA_inactivacion='01/07/2022';
+    this.listaProducto[0].autores='Rafel P';
+    this.listaProducto[0].cantidad_ejemplares_disponibles=100;
+    this.listaProducto[0].nombre_categoria="Literatura";
+    this.listaProducto[0].id_producto=1;
+    this.listaProducto[0].titulo='El hoy es hoy';
+    this.listaProducto[0].max_PERIODO_prestamo='30/04/2023';
+    this.listaProducto[0].tipo='romance';
 
   }
 
