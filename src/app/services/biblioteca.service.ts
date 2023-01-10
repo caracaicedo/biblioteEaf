@@ -9,8 +9,8 @@ import { Constantes } from '../shared/Constantes';
 })
 export class BibliotecaService {
 
-  // url= localStorage.getItem("url_api_bliblioteca")?.toString();
-  url =environment.url_biblioteca;
+  url= localStorage.getItem("url_api_bliblioteca")?.toString();
+  url_local =environment.url_biblioteca;
 
 
   constructor( private http: HttpClient) { }
@@ -32,7 +32,7 @@ cargarInformacionBasica() {
 
   getPropieades(): Observable <any>{
 
-    return this.http.get<any>(`http://localhost:8082/propiedades/admParametroEAF?accion=C&codapp=APP_OPENSHIFT&nombre=OPENSHIFT&valor=APP`);
+    return this.http.post<any>(`${this.url_local }propiedades/admParametroEAF?accion=C&codapp=APP_OPENSHIFT`,null);
   }
 
 

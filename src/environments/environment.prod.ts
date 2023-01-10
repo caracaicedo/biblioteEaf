@@ -1,5 +1,5 @@
 export let environment = {
   production: true,
   env: 'production',
-  url_biblioteca: 'http://localhost:8082/'
+  url_biblioteca: 'http://localhost:8080/'
 };
