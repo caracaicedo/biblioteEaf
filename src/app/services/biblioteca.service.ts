@@ -21,12 +21,12 @@ cargarInformacionBasica() {
 
   getCategoria(): Observable <any>{
 
-    return this.http.get<any>(`${this.url }categoria/getAll`);
+    return this.http.get<any>(`${this.url }categorias/consultar`);
   }
 
   getAutor(): Observable <any>{
 
-    return this.http.get<any>(`${this.url }autor/getAll`);
+    return this.http.get<any>(`${this.url }autor/consultar`);
   }
 
 
